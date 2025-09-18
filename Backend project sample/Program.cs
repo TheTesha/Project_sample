@@ -1,4 +1,23 @@
+using Microsoft.EntityFrameworkCore;
+using Backend_project_sample.Repositories.Products;
+using Backend_project_sample.Services.Products;
+
 var builder = WebApplication.CreateBuilder(args);
+
+// DB Setup
+builder.Services.AddDbContext<Backend_project_sample.Data.ApplicationDBContext>(options =>
+    options.UseNpgsql(
+        connectionString: builder.Configuration.GetConnectionString("DefaultConnection")
+    )
+);
+
+// Add services to the container.
+builder.Services.AddControllersWithViews();
+
+//mapings
+builder.Services.AddScoped<ProductRepository>();
+builder.Services.AddScoped<ProductService>();
+
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
