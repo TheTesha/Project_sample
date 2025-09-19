@@ -35,7 +35,6 @@ namespace Backend_project_sample.Controllers.Products
         [HttpPut]
         public async Task<ActionResult<Product?>> UpdateProductAsync(Guid id, [FromBody] UpdateProduct newProduct)
         {
-            var token = Request.Cookies["accessToken"];
             var product = await _productService.UpdateProductAsync(id, newProduct);
             if (product == null)
                 return NotFound();
